@@ -3,9 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>test</title>
+    <title>Button and Progress Indicator</title>
+    <style>
+      .spinner00 {
+        display: none;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #09f;
+        animation: spin 1s ease infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>這是測試油猴的網頁</h1>
+    <button id="myButton">Click Me</button>
+    <div id="spinner00" class="spinner00"></div>
+
+    <script>
+      document.getElementById('myButton').onclick = function (event) {
+        const btn = event.target
+        const spinner = document.getElementById('spinner00')
+
+        // 显示进度圈，禁用按钮
+        spinner.style.display = 'inline-block'
+        btn.disabled = true
+
+        // 5秒后隐藏进度圈，启用按钮
+        setTimeout(function () {
+          spinner.style.display = 'none'
+          btn.disabled = false
+        }, 5000)
+      }
+    </script>
   </body>
 </html>

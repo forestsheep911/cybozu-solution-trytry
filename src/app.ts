@@ -1,5 +1,6 @@
+import aigen from './aigenkintoneappui/main'
 const app = () => {
-  console.log('monkey jumping on the bed.')
+  aigen()
 }
 
 export default app

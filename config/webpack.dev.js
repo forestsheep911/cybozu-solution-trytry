@@ -33,10 +33,10 @@ module.exports = () => {
       PRODUCTION: false,
       FILENAME: JSON.stringify(`${devBanner.name}.script.js`),
     }),
-    // new HtmlWebpackPlugin({
-    //   template: './public/index.html',
-    //   inject: 'body',
-    // }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      inject: 'body',
+    }),
   )
   baseOptions.devServer = {
     static: [
@@ -44,7 +44,7 @@ module.exports = () => {
         directory: path.join(__dirname, '../public'),
       },
       {
-        directory: path.join(__dirname, '../dist'),
+        directory: path.join(__dirname, '../dist/dev'),
       },
     ],
     compress: true,

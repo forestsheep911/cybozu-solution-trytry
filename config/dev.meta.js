@@ -11,6 +11,7 @@ module.exports = {
     'https://*.s.cybozu.cn/k/*/show*',
     'https://*.s.cybozu.com/k/*/show*',
     'https://*.s.kintone.com/k/*/show*',
+    'http://localhost:8080',
   ],
   grant: ['GM_getValue', 'GM_setValue', 'GM_addValueChangeListener'],
   require: [`file://${resolve(__dirname, '../dist/dev').replaceAll('\\', '/')}/${pj.name}.script.js`],
