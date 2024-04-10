@@ -1,6 +1,27 @@
 import './main.css'
 import './spinner.css'
 const aigen = () => {
+  function createEnterenceInKintone() {
+    const portalTitle = document.querySelector('.ocean-portal-index-header-name')
+    if (portalTitle) {
+      const enterenceButtonParent = document.createElement('span')
+      enterenceButtonParent.innerHTML = `
+      <button id="enterenceButton"
+        class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
+      >
+        AI生成App
+      </button>
+      `
+      // const enterenceButton = enterenceButtonParent.firstChild as HTMLButtonElement
+      // console.log(enterenceButton)
+
+      // insert enterenceButtonParent as portalTitle's brother
+      portalTitle.parentNode?.insertBefore(enterenceButtonParent, portalTitle.nextSibling)
+      enterenceButtonParent.addEventListener('click', function () {
+        showUI()
+      })
+    }
+  }
   function showUI() {
     const insertUI = document.createElement('div')
     insertUI.innerHTML = `
@@ -40,9 +61,18 @@ const aigen = () => {
   </div>
 </div>
   `
-    document.body.appendChild(insertUI)
+    const dialog = document.createElement('div')
+    dialog.classList.add('dialog')
+    dialog.style.position = 'fixed'
+    dialog.style.top = '50%'
+    dialog.style.left = '50%'
+    dialog.style.width = '60%'
+    dialog.style.maxWidth = '800px'
+    dialog.style.transform = 'translate(-50%, -50%)'
+    dialog.appendChild(insertUI)
+    document.body.appendChild(dialog)
     // upload
-    const uploadButton = document.getElementById('uploadButton') as HTMLButtonElement
+    const uploadButton = dialog.querySelector('#uploadButton') as HTMLButtonElement
     const uploadInput = document.getElementById('uploadInput') as HTMLInputElement
     uploadButton.addEventListener('click', function () {
       uploadInput.click()
@@ -88,10 +118,15 @@ const aigen = () => {
   }
   try {
     kintone.events.on('portal.show', function (event) {
+      console.log('portal.show')
+
+      createEnterenceInKintone()
       return event
     })
   } catch (e) {
-    showUI()
+    if (e instanceof ReferenceError) {
+      showUI()
+    }
   }
 }
 
