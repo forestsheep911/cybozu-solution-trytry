@@ -48,7 +48,7 @@ module.exports = () => {
       },
     ],
     compress: true,
-    port: 8080,
+    port: 54321,
     hot: false,
     open: true,
     liveReload: true,
